@@ -30,4 +30,5 @@ dependencies {
     compile 'io.relayr:android-commons:1.1.0'
 
     compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.google.android.gms:play-services-location:8.3.0'
 }
