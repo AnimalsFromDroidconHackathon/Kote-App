@@ -24,4 +24,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
+
+    compile 'io.relayr:android-sdk:1.0.2'
+    compile 'io.relayr:java-sdk:1.0.6'
+    compile 'io.relayr:android-commons:1.1.0'
 }

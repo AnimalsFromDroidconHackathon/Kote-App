@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="android-sdk-1.0.2">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/io.relayr/android-sdk/1.0.2/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/io.relayr/android-sdk/1.0.2/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.relayr/android-sdk/1.0.2/1edb8dccf25ff9ebe3b85f136fc9c236f392906d/android-sdk-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

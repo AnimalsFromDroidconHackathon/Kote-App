@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="java-sdk-1.0.6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.relayr/java-sdk/1.0.6/152990fddac7e5701c87e83e0479b5062e523667/java-sdk-1.0.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.relayr/java-sdk/1.0.6/e6f76070069fa50b2d6ce690c9fea140f23ccc59/java-sdk-1.0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
