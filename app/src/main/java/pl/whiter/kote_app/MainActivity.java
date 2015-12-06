@@ -1,11 +1,18 @@
 package pl.whiter.kote_app;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,10 +33,13 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final String URL = "http://kote-web/%s";
+    public static final String PERMISSION = Manifest.permission.READ_PHONE_STATE;
+    public static final int REQUEST_CODE = 1;
 
     private Checker checker;
 
     private ImageView qrCodeImage;
+    private CoordinatorLayout rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +48,24 @@ public class MainActivity extends AppCompatActivity {
         Button getQrCodeButton = (Button) findViewById(R.id.get_qr_code);
         getQrCodeButton.setOnClickListener(new QrCodeButtonClickListener());
         qrCodeImage = (ImageView) findViewById(R.id.qr_code);
+        rootView = (CoordinatorLayout) findViewById(R.id.root_view);
         checker = new Checker();
         checker.startChecking();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == REQUEST_CODE) {
+            onPhoneRequestResult(permissions, grantResults);
+        }
+    }
+
+    private void onPhoneRequestResult(String[] permissions, int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            generateQrCode();
+        } else {
+            Snackbar.make(rootView, "Not able to generate qr code", Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -51,8 +77,33 @@ public class MainActivity extends AppCompatActivity {
     private class QrCodeButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            generateQrCode();
+            int phonePermission = ContextCompat.checkSelfPermission(MainActivity.this, PERMISSION);
+            if (PackageManager.PERMISSION_GRANTED == phonePermission) {
+                generateQrCode();
+            } else {
+                requestPhonePermission();
+            }
         }
+    }
+
+    private void requestPhonePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, PERMISSION)) {
+            Snackbar.make(rootView, "Grant read phone, please :)", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Gimme", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            request();
+                        }
+                    }).show();
+        } else {
+            request();
+        }
+    }
+
+    private void request() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{PERMISSION},
+                REQUEST_CODE);
     }
 
     private void generateQrCode() {
