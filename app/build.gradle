@@ -17,6 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
@@ -25,10 +31,14 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
 
-    compile 'io.relayr:android-sdk:1.0.2'
-    compile 'io.relayr:java-sdk:1.0.6'
-    compile 'io.relayr:android-commons:1.1.0'
+//    compile 'io.relayr:android-sdk:1.0.2'
+//    compile 'io.relayr:java-sdk:1.0.6'
+//    compile 'io.relayr:android-commons:1.1.0'
+
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'io.reactivex:rxjava:1.0.16'
 
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.google.android.gms:play-services-location:8.3.0'
+    compile 'com.firebase:firebase-client-android:2.4.1+'
 }
