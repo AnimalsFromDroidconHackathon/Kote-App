@@ -56,9 +56,20 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
         setContentView(R.layout.activity_main);
         Button getQrCodeButton = (Button) findViewById(R.id.get_qr_code);
         getQrCodeButton.setOnClickListener(new QrCodeButtonClickListener());
+
+        Button getGpsButton = (Button) findViewById(R.id.get_gps);
+        getGpsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkLocationPermission(scanAction, true);
+            }
+        });
+
         qrCodeImage = (ImageView) findViewById(R.id.qr_code);
         rootView = (CoordinatorLayout) findViewById(R.id.root_view);
         gpsCoordinates = (TextView) findViewById(R.id.gps_coordinates);
+
+
         checker = new Checker();
         checker.startChecking();
         locationManager = new LocationManager(this);
@@ -68,28 +79,9 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        checkLocationPermission(startAction);
-    }
-
-
-    @Override
     protected void onStop() {
         super.onStop();
-        checkLocationPermission(stopAction);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        checkLocationPermission(resumeAction);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        checkLocationPermission(pauseAction);
+        checkLocationPermission(stopAction, false);
     }
 
     private boolean checkPlayServices() {
@@ -152,11 +144,11 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
         gpsCoordinates.setText(String.format("%f %f", latitude, longitude));
     }
 
-    private void checkLocationPermission(Action0 actionSuccess) {
+    private void checkLocationPermission(Action0 actionSuccess, boolean request) {
         int locationPermission = ContextCompat.checkSelfPermission(this, PERMISSION_LOCATION);
         if (PackageManager.PERMISSION_GRANTED == locationPermission) {
             actionSuccess.call();
-        } else {
+        } else if(request){
             if(requestingLocation) {
                 locationSuccessList.add(actionSuccess);
                 return;
@@ -240,10 +232,10 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
                 });
     }
 
-    private Action0 startAction = new Action0() {
+    private Action0 scanAction = new Action0() {
         @Override
         public void call() {
-            locationManager.start();
+            locationManager.getLocation();
         }
     };
 
@@ -254,18 +246,5 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
         }
     };
 
-    private Action0 resumeAction = new Action0() {
-        @Override
-        public void call() {
-            locationManager.resume();
-        }
-    };
-
-    private Action0 pauseAction = new Action0() {
-        @Override
-        public void call() {
-            locationManager.pause();
-        }
-    };
 }
 

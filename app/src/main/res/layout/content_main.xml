@@ -22,6 +22,12 @@
         tools:text="50.65 19.76"/>
 
     <Button
+        android:id="@+id/get_gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GET GPS"/>
+
+    <Button
         android:id="@+id/get_qr_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

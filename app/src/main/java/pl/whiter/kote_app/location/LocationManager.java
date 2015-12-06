@@ -42,7 +42,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks,
         createLocationRequest();
     }
 
-    public void start() {
+    public void getLocation() {
         if(mGoogleApiClient == null){
             return;
         }
@@ -53,23 +53,10 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks,
         if(mGoogleApiClient == null){
             return;
         }
+        stopLocationUpdates();
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
-    }
-
-    public void resume() {
-        // Resuming the periodic location updates
-        if(mGoogleApiClient == null) {
-            return;
-        }
-        if (mGoogleApiClient.isConnected() && mRequestingLocationUpdates) {
-            startLocationUpdates();
-        }
-    }
-
-    public void pause() {
-        stopLocationUpdates();
     }
 
 
@@ -96,7 +83,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks,
     }
 
     protected void stopLocationUpdates() {
-        if (mGoogleApiClient == null) {
+        if (mGoogleApiClient == null || !mGoogleApiClient.isConnected()) {
             return;
         }
         LocationServices.FusedLocationApi.
