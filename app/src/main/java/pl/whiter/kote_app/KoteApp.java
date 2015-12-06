@@ -12,8 +12,8 @@ public class KoteApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        new RelayrSdk.Builder(this)
-                .inMockMode(true)
-                .build();
+//        new RelayrSdk.Builder(this)
+//                .inMockMode(true)
+//                .build();
     }
 }
