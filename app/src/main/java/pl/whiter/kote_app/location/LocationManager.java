@@ -37,34 +37,40 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks,
         this.callback = callback;
     }
 
-    public void create(Context context){
+    public void create(Context context) {
         buildGoogleApiClient(context);
         createLocationRequest();
     }
 
-    public void start(){
-        if (mGoogleApiClient != null) {
-            mGoogleApiClient.connect();
+    public void start() {
+        if(mGoogleApiClient == null){
+            return;
         }
+        mGoogleApiClient.connect();
     }
 
-    public void stop(){
+    public void stop() {
+        if(mGoogleApiClient == null){
+            return;
+        }
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
     }
 
-    public void resume(){
+    public void resume() {
         // Resuming the periodic location updates
+        if(mGoogleApiClient == null) {
+            return;
+        }
         if (mGoogleApiClient.isConnected() && mRequestingLocationUpdates) {
             startLocationUpdates();
         }
     }
 
-    public void pause(){
+    public void pause() {
         stopLocationUpdates();
     }
-
 
 
     protected synchronized void buildGoogleApiClient(Context context) {
@@ -90,6 +96,9 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks,
     }
 
     protected void stopLocationUpdates() {
+        if (mGoogleApiClient == null) {
+            return;
+        }
         LocationServices.FusedLocationApi.
                 removeLocationUpdates(mGoogleApiClient,
                         this);

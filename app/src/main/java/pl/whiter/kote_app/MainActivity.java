@@ -1,10 +1,8 @@
 package pl.whiter.kote_app;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -12,7 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,16 +19,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import pl.whiter.kote_app.location.LocationManager;
-import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func0;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements LocationManager.Callback {
@@ -39,9 +35,10 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
 
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
 
-    private static final String URL = "http://kote-web/%s";
-    public static final String PERMISSION = Manifest.permission.READ_PHONE_STATE;
-    public static final int REQUEST_CODE = 1;
+    public static final String PERMISSION_PHONE = Manifest.permission.READ_PHONE_STATE;
+    public static final String PERMISSION_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    public static final int REQUEST_CODE_PHONE = 1;
+    public static final int REQUEST_CODE_LOCATION = 2;
 
     private Checker checker;
 
@@ -49,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
     private CoordinatorLayout rootView;
     private TextView gpsCoordinates;
     private LocationManager locationManager;
+
+    private List<Action0> locationSuccessList = new ArrayList<>();
+    private boolean requestingLocation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,26 +70,26 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
     @Override
     protected void onStart() {
         super.onStart();
-        locationManager.start();
+        checkLocationPermission(startAction);
     }
 
 
     @Override
     protected void onStop() {
         super.onStop();
-        locationManager.stop();
+        checkLocationPermission(stopAction);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        locationManager.resume();
+        checkLocationPermission(resumeAction);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        locationManager.pause();
+        checkLocationPermission(pauseAction);
     }
 
     private boolean checkPlayServices() {
@@ -111,8 +111,22 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == REQUEST_CODE) {
+        if (REQUEST_CODE_PHONE == requestCode) {
             onPhoneRequestResult(permissions, grantResults);
+        } else if (REQUEST_CODE_LOCATION == requestCode) {
+            onLocationRequestResult(permissions, grantResults);
+        }
+    }
+
+    private void onLocationRequestResult(String[] permissions, int[] grantResults) {
+        requestingLocation = false;
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "onLocationRequestResult: success list size= " + locationSuccessList.size());
+            for (Action0 action : locationSuccessList) {
+                action.call();
+            }
+        } else {
+            Snackbar.make(rootView, "Not able to find your cat!", Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -138,10 +152,24 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
         gpsCoordinates.setText(String.format("%f %f", latitude, longitude));
     }
 
+    private void checkLocationPermission(Action0 actionSuccess) {
+        int locationPermission = ContextCompat.checkSelfPermission(this, PERMISSION_LOCATION);
+        if (PackageManager.PERMISSION_GRANTED == locationPermission) {
+            actionSuccess.call();
+        } else {
+            if(requestingLocation) {
+                locationSuccessList.add(actionSuccess);
+                return;
+            }
+            requestingLocation = true;
+            requestLocationPermission();
+        }
+    }
+
     private class QrCodeButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            int phonePermission = ContextCompat.checkSelfPermission(MainActivity.this, PERMISSION);
+            int phonePermission = ContextCompat.checkSelfPermission(MainActivity.this, PERMISSION_PHONE);
             if (PackageManager.PERMISSION_GRANTED == phonePermission) {
                 generateQrCode();
             } else {
@@ -150,28 +178,48 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
         }
     }
 
+    private void requestLocationPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, PERMISSION_LOCATION)) {
+            Snackbar.make(rootView, "Grant location for meow", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Gimme", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            requestLocation();
+                        }
+                    }).show();
+        } else {
+            requestLocation();
+        }
+    }
+
     private void requestPhonePermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, PERMISSION)) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, PERMISSION_PHONE)) {
             Snackbar.make(rootView, "Grant read phone, please :)", Snackbar.LENGTH_INDEFINITE)
                     .setAction("Gimme", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            request();
+                            requestPhone();
                         }
                     }).show();
         } else {
-            request();
+            requestPhone();
         }
     }
 
-    private void request() {
+    private void requestLocation() {
         ActivityCompat.requestPermissions(this,
-                new String[]{PERMISSION},
-                REQUEST_CODE);
+                new String[]{PERMISSION_LOCATION},
+                REQUEST_CODE_LOCATION);
+    }
+
+    private void requestPhone() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{PERMISSION_PHONE},
+                REQUEST_CODE_PHONE);
     }
 
     private void generateQrCode() {
-        getQrCodeBitmap
+        BitmapHelper.createQrCode(this)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Bitmap>() {
@@ -192,33 +240,32 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
                 });
     }
 
-
-    private Observable<Bitmap> getQrCodeBitmap = Observable.defer(new Func0<Observable<Bitmap>>() {
+    private Action0 startAction = new Action0() {
         @Override
-        public Observable<Bitmap> call() {
-            QRCodeWriter writer = new QRCodeWriter();
-            Bitmap bitmap = null;
-            TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            String uuid = tManager.getDeviceId();
-
-            String content = String.format(URL, uuid);
-            BitMatrix bitMatrix;
-            try {
-                bitMatrix = writer.encode(content, BarcodeFormat.QR_CODE, 512, 512);
-                int width = bitMatrix.getWidth();
-                int height = bitMatrix.getHeight();
-                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-                for (int x = 0; x < width; x++) {
-                    for (int y = 0; y < height; y++) {
-                        bitmap.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
-                    }
-                }
-            } catch (WriterException e) {
-                e.printStackTrace();
-            }
-
-            return Observable.just(bitmap);
+        public void call() {
+            locationManager.start();
         }
-    });
+    };
+
+    private Action0 stopAction = new Action0() {
+        @Override
+        public void call() {
+            locationManager.stop();
+        }
+    };
+
+    private Action0 resumeAction = new Action0() {
+        @Override
+        public void call() {
+            locationManager.resume();
+        }
+    };
+
+    private Action0 pauseAction = new Action0() {
+        @Override
+        public void call() {
+            locationManager.pause();
+        }
+    };
 }
 
