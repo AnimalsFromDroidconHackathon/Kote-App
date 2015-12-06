@@ -33,7 +33,7 @@ public class Checker {
                 if (dataSnapshot == null) {
                     return;
                 }
-                String childPath = KoteApp.uuid;//"8672710297893214";//;
+                String childPath = KoteApp.uuid;
                 DataSnapshot child = dataSnapshot.child("animals").child(childPath);
                 Log.d(TAG, "onDataChange: child " + child);
                 if (child.exists()) {
