@@ -27,11 +27,10 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks,
 
     private GoogleApiClient mGoogleApiClient;
 
-    private boolean mRequestingLocationUpdates = true;
-
     private LocationRequest mLocationRequest;
 
     private Callback callback;
+
 
     public LocationManager(Callback callback) {
         this.callback = callback;
@@ -99,9 +98,7 @@ public class LocationManager implements GoogleApiClient.ConnectionCallbacks,
     @Override
     public void onConnected(Bundle bundle) {
         displayLocation();
-        if (mRequestingLocationUpdates) {
-            startLocationUpdates();
-        }
+        startLocationUpdates();
     }
 
     @Override

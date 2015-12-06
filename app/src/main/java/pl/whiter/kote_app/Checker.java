@@ -3,63 +3,63 @@ package pl.whiter.kote_app;
 
 import android.util.Log;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
-import pl.whiter.kote_app.api.AnimalApi;
 import pl.whiter.kote_app.model.Kote;
-import rx.Subscriber;
 
 public class Checker {
 
     private static final String TAG = Checker.class.getSimpleName();
 
-    private static final int BASE_CHECK_TIME = 30;
-    private static final TimeUnit BASE_CHECK_TIME_UNIT = TimeUnit.SECONDS;
 
-    private ScheduledExecutorService scheduledExecutorService;
+    public interface Callback {
+        void onKoteLost();
+    }
 
 
-    public Checker() {
+    private ValueEventListener listener;
+    private Callback callback;
+
+    public Checker(Callback callback) {
+        this.callback = callback;
     }
 
     public void startChecking() {
-        if (scheduledExecutorService == null) {
-            scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-            scheduledExecutorService.scheduleWithFixedDelay(checkRunnable, 0, BASE_CHECK_TIME, BASE_CHECK_TIME_UNIT);
-        }
+        listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot == null) {
+                    return;
+                }
+                DataSnapshot child = dataSnapshot.child("animals").child(KoteApp.uuid);
+                Log.d(TAG, "onDataChange: child " + child);
+                if (child.exists()) {
+                    Log.d(TAG, "onDataChange: exists");
+                    final Kote kote = child.getValue(Kote.class);
+
+                    if (kote.lost) {
+                        callback.onKoteLost();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        };
+        KoteApp.firebase.addValueEventListener(listener);
     }
 
 
     public void stopChecking() {
-        if (scheduledExecutorService != null) {
-            scheduledExecutorService.shutdown();
-            scheduledExecutorService = null;
+
+        if (listener != null) {
+            KoteApp.firebase.removeEventListener(listener);
         }
+
     }
 
-    private Runnable checkRunnable = new Runnable() {
-        @Override
-        public void run() {
-            Log.d(TAG,"checking");
-            AnimalApi.getService().getKoteAnimal()
-                    .subscribe(new Subscriber<Kote>() {
-                        @Override
-                        public void onCompleted() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-
-                        @Override
-                        public void onNext(Kote kote) {
-
-                        }
-                    });
-        }
-    };
 }

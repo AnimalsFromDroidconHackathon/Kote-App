@@ -5,9 +5,11 @@ package pl.whiter.kote_app.model;
  */
 public class Kote {
 
-    private boolean alert;
-
-    public boolean isAlert() {
-        return alert;
-    }
+    public String id;
+    public String name;
+    public String type;
+    public boolean lost;
+    public String pictureUrl;
+    public String ownerId;
+    public String ownerName;
 }

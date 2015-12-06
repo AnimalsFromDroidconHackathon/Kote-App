@@ -30,10 +30,9 @@ public final class BitmapHelper {
             public Observable<Bitmap> call() {
                 QRCodeWriter writer = new QRCodeWriter();
                 Bitmap bitmap = null;
-                TelephonyManager tManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-                String uuid = tManager.getDeviceId();
 
-                String content = String.format(URL, uuid);
+
+                String content = String.format(URL, KoteApp.uuid);
                 BitMatrix bitMatrix;
                 try {
                     bitMatrix = writer.encode(content, BarcodeFormat.QR_CODE, 512, 512);

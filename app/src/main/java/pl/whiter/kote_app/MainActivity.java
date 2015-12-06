@@ -29,7 +29,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements LocationManager.Callback {
+public class MainActivity extends AppCompatActivity implements LocationManager.Callback, Checker.Callback {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -57,20 +57,12 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
         Button getQrCodeButton = (Button) findViewById(R.id.get_qr_code);
         getQrCodeButton.setOnClickListener(new QrCodeButtonClickListener());
 
-        Button getGpsButton = (Button) findViewById(R.id.get_gps);
-        getGpsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkLocationPermission(scanAction, true);
-            }
-        });
-
         qrCodeImage = (ImageView) findViewById(R.id.qr_code);
         rootView = (CoordinatorLayout) findViewById(R.id.root_view);
         gpsCoordinates = (TextView) findViewById(R.id.gps_coordinates);
 
 
-        checker = new Checker();
+        checker = new Checker(this);
         checker.startChecking();
         locationManager = new LocationManager(this);
         if (checkPlayServices()) {
@@ -136,6 +128,10 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
         checker.stopChecking();
     }
 
+    @Override
+    public void onKoteLost() {
+        checkLocationPermission(scanAction, true);
+    }
 
     @Override
     public void onLocationChanged(Location location) {
