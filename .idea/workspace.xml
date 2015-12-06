@@ -10,13 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99350c87-13bc-4adb-8141-c3809f20f7f9" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/android_commons_1_1_0.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/api/AnimalApi.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/api/AnimalApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/BitmapHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/BitmapHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/Checker.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/Checker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/model/Kote.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/model/Kote.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/KoteApp.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/KoteApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/location/LocationManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/location/LocationManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -46,39 +41,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.57763976">
-              <caret line="180" column="5" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4779#4780#0" expanded="true" />
-                <element signature="e#4836#4837#0" expanded="true" />
-                <element signature="e#6345#6556#0" expanded="true" />
-                <element signature="e#6555#6556#0" expanded="true" />
-                <element signature="e#6901#7109#0" expanded="true" />
-                <element signature="e#7108#7109#0" expanded="true" />
-                <element signature="e#7965#7966#0" expanded="true" />
-                <element signature="e#8032#8033#0" expanded="true" />
-                <element signature="e#8119#8120#0" expanded="true" />
-                <element signature="e#8201#8202#0" expanded="true" />
-                <element signature="e#8263#8384#0" expanded="true" />
-                <element signature="e#8383#8384#0" expanded="true" />
-                <element signature="e#8420#8534#0" expanded="true" />
-                <element signature="e#8533#8534#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Checker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/Checker.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+              <caret line="130" column="26" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4902#4903#0" expanded="true" />
+                <element signature="e#4959#4960#0" expanded="true" />
+                <element signature="e#6710#6921#0" expanded="true" />
+                <element signature="e#6920#6921#0" expanded="true" />
+                <element signature="e#7266#7474#0" expanded="true" />
+                <element signature="e#7473#7474#0" expanded="true" />
+                <element signature="e#8330#8331#0" expanded="true" />
+                <element signature="e#8397#8398#0" expanded="true" />
+                <element signature="e#8484#8485#0" expanded="true" />
+                <element signature="e#8566#8567#0" expanded="true" />
+                <element signature="e#8628#8749#0" expanded="true" />
+                <element signature="e#8748#8749#0" expanded="true" />
+                <element signature="e#8785#8899#0" expanded="true" />
+                <element signature="e#8898#8899#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,6 +73,18 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Checker.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/Checker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6708075">
+              <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1734,10 +1729,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/api/AnimalApi.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/BitmapHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/model/Kote.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/KoteApp.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/location/LocationManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/model/Kote.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/Checker.java" />
       </list>
     </option>
@@ -2117,7 +2112,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449409985819</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Running firebase">
+      <created>1449411966575</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1449411966575</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2133,7 +2134,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34181818" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29818183" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32909092" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2172,11 +2173,12 @@
     <MESSAGE value="Checking permission" />
     <MESSAGE value="GPS on button click" />
     <MESSAGE value="Firebase SDK" />
-    <option name="LAST_COMMIT_MESSAGE" value="Firebase SDK" />
+    <MESSAGE value="Running firebase" />
+    <option name="LAST_COMMIT_MESSAGE" value="Running firebase" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2360,25 +2362,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-jvm/2.4.1/105f791ea41c7b01d7b6167887e89f3b43de5af2/firebase-client-jvm-2.4.1.jar!/com/firebase/client/DataSnapshot.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3601286">
-          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-          <folding>
-            <element signature="e#1494#1495#0" expanded="true" />
-            <element signature="e#1547#1548#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/model/Kote.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21364985">
-          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/KoteApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51816446">
@@ -2409,36 +2392,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/Checker.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-jvm/2.4.1/105f791ea41c7b01d7b6167887e89f3b43de5af2/firebase-client-jvm-2.4.1.jar!/com/firebase/client/DataSnapshot.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.36301368">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/model/Kote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.038575668">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57763976">
-          <caret line="180" column="5" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="130" column="26" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4779#4780#0" expanded="true" />
-            <element signature="e#4836#4837#0" expanded="true" />
-            <element signature="e#6345#6556#0" expanded="true" />
-            <element signature="e#6555#6556#0" expanded="true" />
-            <element signature="e#6901#7109#0" expanded="true" />
-            <element signature="e#7108#7109#0" expanded="true" />
-            <element signature="e#7965#7966#0" expanded="true" />
-            <element signature="e#8032#8033#0" expanded="true" />
-            <element signature="e#8119#8120#0" expanded="true" />
-            <element signature="e#8201#8202#0" expanded="true" />
-            <element signature="e#8263#8384#0" expanded="true" />
-            <element signature="e#8383#8384#0" expanded="true" />
-            <element signature="e#8420#8534#0" expanded="true" />
-            <element signature="e#8533#8534#0" expanded="true" />
+            <element signature="e#4902#4903#0" expanded="true" />
+            <element signature="e#4959#4960#0" expanded="true" />
+            <element signature="e#6710#6921#0" expanded="true" />
+            <element signature="e#6920#6921#0" expanded="true" />
+            <element signature="e#7266#7474#0" expanded="true" />
+            <element signature="e#7473#7474#0" expanded="true" />
+            <element signature="e#8330#8331#0" expanded="true" />
+            <element signature="e#8397#8398#0" expanded="true" />
+            <element signature="e#8484#8485#0" expanded="true" />
+            <element signature="e#8566#8567#0" expanded="true" />
+            <element signature="e#8628#8749#0" expanded="true" />
+            <element signature="e#8748#8749#0" expanded="true" />
+            <element signature="e#8785#8899#0" expanded="true" />
+            <element signature="e#8898#8899#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/whiter/kote_app/Checker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6708075">
+          <caret line="42" column="24" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

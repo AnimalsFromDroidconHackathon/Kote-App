@@ -17,13 +17,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import pl.whiter.kote_app.location.LocationManager;
+import pl.whiter.kote_app.model.Kote;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -138,6 +142,13 @@ public class MainActivity extends AppCompatActivity implements LocationManager.C
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
         gpsCoordinates.setText(String.format("%f %f", latitude, longitude));
+        Firebase firebase = KoteApp.firebase.child("animals").child(KoteApp.uuid);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("lat",latitude);
+        map.put("lnt", longitude);
+
+        firebase.updateChildren(map);
     }
 
     private void checkLocationPermission(Action0 actionSuccess, boolean request) {

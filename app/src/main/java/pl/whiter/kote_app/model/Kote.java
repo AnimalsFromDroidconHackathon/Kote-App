@@ -12,4 +12,6 @@ public class Kote {
     public String pictureUrl;
     public String ownerId;
     public String ownerName;
+    public Double lat;
+    public Double lnt;
 }
